@@ -88,6 +88,14 @@
     };
     version = "9.0.0";
   };
+  bcrypt = {
+    source = {
+      remotes = ["https://rubygems.org"];
+      sha256 = "0ysblqxkclmnhrd0kmb5mr8p38mbar633gdsb14b7dhkhgawgzfy";
+      type = "gem";
+    };
+    version = "3.1.12";
+  };
   bindex = {
     source = {
       remotes = ["https://rubygems.org"];
@@ -136,6 +144,15 @@
       type = "gem";
     };
     version = "1.0.4";
+  };
+  devise = {
+    dependencies = ["bcrypt" "orm_adapter" "railties" "responders" "warden"];
+    source = {
+      remotes = ["https://rubygems.org"];
+      sha256 = "1vs8nibl568ghm6a7hbw6xgcv8zbm4gykprcxpnzi7bz5d4gvcjx";
+      type = "gem";
+    };
+    version = "4.5.0";
   };
   diff-lcs = {
     source = {
@@ -186,15 +203,6 @@
       type = "gem";
     };
     version = "1.1.0";
-  };
-  jbuilder = {
-    dependencies = ["activesupport" "multi_json"];
-    source = {
-      remotes = ["https://rubygems.org"];
-      sha256 = "1n3myqk2hdnidzzbgcdz2r1y4cr5vpz5nkfzs0lz4y9gkjbjyh2j";
-      type = "gem";
-    };
-    version = "2.7.0";
   };
   listen = {
     dependencies = ["rb-fsevent" "rb-inotify" "ruby_dep"];
@@ -280,14 +288,6 @@
     };
     version = "1.2.4";
   };
-  multi_json = {
-    source = {
-      remotes = ["https://rubygems.org"];
-      sha256 = "1rl0qy4inf1mp8mybfk56dfga0mvx97zwpmq5xmiwl5r770171nv";
-      type = "gem";
-    };
-    version = "1.13.1";
-  };
   nio4r = {
     source = {
       remotes = ["https://rubygems.org"];
@@ -304,6 +304,14 @@
       type = "gem";
     };
     version = "1.8.4";
+  };
+  orm_adapter = {
+    source = {
+      remotes = ["https://rubygems.org"];
+      sha256 = "1fg9jpjlzf5y49qs9mlpdrgs5rpcyihq1s4k79nv9js0spjhnpda";
+      type = "gem";
+    };
+    version = "0.5.0";
   };
   pg = {
     source = {
@@ -398,6 +406,15 @@
       type = "gem";
     };
     version = "0.9.10";
+  };
+  responders = {
+    dependencies = ["actionpack" "railties"];
+    source = {
+      remotes = ["https://rubygems.org"];
+      sha256 = "1rhdyyvvm26f2l3fgwdp6xasfl2y0whwgy766bhdwz697mf78zfn";
+      type = "gem";
+    };
+    version = "2.4.0";
   };
   rspec = {
     dependencies = ["rspec-core" "rspec-expectations" "rspec-mocks"];
@@ -563,6 +580,15 @@
       type = "gem";
     };
     version = "4.1.18";
+  };
+  warden = {
+    dependencies = ["rack"];
+    source = {
+      remotes = ["https://rubygems.org"];
+      sha256 = "0va966lhpylcwbqb9n151kkihx30agh0a57mwjwdxyanll4s1q12";
+      type = "gem";
+    };
+    version = "1.2.7";
   };
   web-console = {
     dependencies = ["actionview" "activemodel" "bindex" "railties"];
