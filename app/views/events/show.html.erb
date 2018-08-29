@@ -1,19 +1,32 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @event.name %>
-</p>
+<dl>
+  <dt>Name:</dt>
+  <dd><%= @event.name %></dd>
+  <dl>Date:</dl>
+  <dd><%= @event.date %></dd>
+  <dl>Where:</dl>
+  <dd><%= @event.where %></dd>
+</dl>
 
-<p>
-  <strong>Date:</strong>
-  <%= @event.date %>
-</p>
+<%= link_to 'Edit', edit_event_path(@event) %>
 
-<p>
-  <strong>Where:</strong>
-  <%= @event.where %>
-</p>
-
-<%= link_to 'Edit', edit_event_path(@event) %> |
-<%= link_to 'Back', events_path %>
+<table>
+  <tr>
+    <th>Game Title</th>
+    <th>Min Players</th>
+    <th>Max Players</th>
+    <th>Length</th>
+    <th>BGG Link</th>
+  </tr>
+  <% @event.games.each do |game| %>
+    <tr>
+      <td><%= game.name%></td>
+      <td><%= game.min_players%></td>
+      <td><%= game.max_players%></td>
+      <td><%= game.duration_secs / 60 %></td>
+      <td><%= link_to "BGG", game.bgg_link %></td>
+    </tr>
+  <% end %>
+</table>
+<%= link_to 'Add a Game', new_game_path(event_id: @event.id) %>

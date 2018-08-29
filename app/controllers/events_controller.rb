@@ -1,4 +1,5 @@
 class EventsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_event, only: [:show, :edit, :update, :destroy]
 
   # GET /events
@@ -48,7 +49,7 @@ class EventsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_event
-      @event = Event.find(params[:id])
+      @event = Event.includes(:games).find(params[:id])
     end
 
     # Only allow a trusted parameter "white list" through.

@@ -1,10 +1,6 @@
 class GamesController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_game, only: [:show, :edit, :update, :destroy]
-
-  # GET /games
-  def index
-    @games = Game.all
-  end
 
   # GET /games/1
   def show
@@ -13,6 +9,7 @@ class GamesController < ApplicationController
   # GET /games/new
   def new
     @game = Game.new
+    @game.event_id = params[:event_id]
   end
 
   # GET /games/1/edit
@@ -22,6 +19,8 @@ class GamesController < ApplicationController
   # POST /games
   def create
     @game = Game.new(game_params)
+    @game.suggestor = current_user
+    @game.users << current_user
 
     if @game.save
       redirect_to @game, notice: 'Game was successfully created.'
@@ -53,6 +52,6 @@ class GamesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def game_params
-      params.require(:game).permit(:name, :min_players, :max_players, :bgg_link, :duration_secs)
+      params.require(:game).permit(:name, :min_players, :max_players, :bgg_link, :duration_secs, :event_id)
     end
 end
