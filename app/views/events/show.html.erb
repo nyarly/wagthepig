@@ -18,14 +18,18 @@
     <th>Max Players</th>
     <th>Length</th>
     <th>BGG Link</th>
+    <th>Interested Players</th>
+    <th>My Interest</th>
   </tr>
   <% @event.games.each do |game| %>
     <tr>
       <td><%= game.name%></td>
       <td><%= game.min_players%></td>
       <td><%= game.max_players%></td>
-      <td><%= game.duration_secs / 60 %></td>
-      <td><%= link_to "BGG", game.bgg_link %></td>
+      <td><%= (game.duration_secs || 0) / 60 %></td>
+      <td><%= game.bgg_link.present? ? link_to("BGG", game.bgg_link) : "" %></td>
+      <td><%= game.interests.size %></td>
+      <td><%= render partial: 'my_interests', locals: {game: game} %></td>
     </tr>
   <% end %>
 </table>

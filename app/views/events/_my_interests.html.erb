@@ -1,0 +1,10 @@
+<% if (my_interest = game.interests.find{|i| i.user_id == current_user.id}).present? %>
+  <%= button_to "Edit", edit_interest_path(my_interest.id), method: :get %>
+  <%= button_to "Delete", interest_path(my_interest.id), method: :delete %>
+<% else %>
+  <%= form_with url: interests_path do |form| %>
+    <%= hidden_field_tag 'interest[game_id]', game.id %>
+    <%= hidden_field_tag 'interest[user_id]', current_user.id %>
+    <%= button_tag "Create" %>
+  <% end %>
+<% end %>
