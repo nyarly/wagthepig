@@ -14,7 +14,7 @@
 
   <div class="field">
     <%= form.label :name %>
-    <%= form.text_area :name %>
+    <%= form.text_field :name %>
   </div>
 
   <div class="field">
@@ -29,12 +29,12 @@
 
   <div class="field">
     <%= form.label :bgg_link %>
-    <%= form.text_area :bgg_link %>
+    <%= form.text_field :bgg_link %>
   </div>
 
   <div class="field">
-    <%= form.label :duration_secs %>
-    <%= form.text_field :duration_secs %>
+    <%= form.label :duration_minutes %>
+    <%= form.number_field :duration_minutes %>
   </div>
 
   <div class="actions">

@@ -32,7 +32,7 @@ class GamesController < ApplicationController
   # PATCH/PUT /games/1
   def update
     if @game.update(game_params)
-      redirect_to @game, notice: 'Game was successfully updated.'
+      redirect_to @game.event, notice: 'Game was successfully updated.'
     else
       render :edit
     end
@@ -52,6 +52,11 @@ class GamesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def game_params
-      params.require(:game).permit(:name, :min_players, :max_players, :bgg_link, :duration_secs, :event_id)
+      params
+        .require(:game)
+        .permit(:name, :min_players, :max_players, :bgg_link, :duration_minutes, :event_id)
+        .tap do |params|
+        params[:duration_secs] = params.delete(:duration_minutes).to_i * 60
+      end
     end
 end

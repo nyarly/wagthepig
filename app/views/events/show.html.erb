@@ -13,23 +13,21 @@
 
 <table>
   <tr>
-    <th>Game Title</th>
-    <th>Min Players</th>
-    <th>Max Players</th>
+    <th>Game</th>
+    <th>Players</th>
     <th>Length</th>
-    <th>BGG Link</th>
-    <th>Interested Players</th>
-    <th>My Interest</th>
+    <th># Interested</th>
+    <th>Me</th>
+    <th>Tools</th>
   </tr>
   <% @event.games.each do |game| %>
     <tr>
-      <td><%= game.name%></td>
-      <td><%= game.min_players%></td>
-      <td><%= game.max_players%></td>
+      <td><%= game.bgg_link.present? ? link_to(game.name, game.bgg_link) : game.name %></td>
+      <td><%= game.min_players%>-<%= game.max_players %></td>
       <td><%= (game.duration_secs || 0) / 60 %></td>
-      <td><%= game.bgg_link.present? ? link_to("BGG", game.bgg_link) : "" %></td>
       <td><%= game.interests.size %></td>
       <td><%= render partial: 'my_interests', locals: {game: game} %></td>
+      <td><%= button_to "Edit Game", {controller: :games, action: :edit, id: game.id}, method: :get %></td>
     </tr>
   <% end %>
 </table>
