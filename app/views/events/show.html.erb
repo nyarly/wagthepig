@@ -1,11 +1,9 @@
-<p id="notice"><%= notice %></p>
-
-<dl>
+<dl class='event-data'>
   <dt>Name:</dt>
   <dd><%= @event.name %></dd>
-  <dl>Date:</dl>
+  <dt>Date:</dt>
   <dd><%= @event.date %></dd>
-  <dl>Where:</dl>
+  <dt>Where:</dt>
   <dd><%= @event.where %></dd>
 </dl>
 
@@ -13,21 +11,21 @@
 
 <table>
   <tr>
-    <th>Game</th>
-    <th>Players</th>
-    <th>Length</th>
-    <th># Interested</th>
-    <th>Me</th>
-    <th>Tools</th>
+    <th class='game'>Game</th>
+    <th class='players'>Players</th>
+    <th class='length'>Length</th>
+    <th class='interested'># Interested</th>
+    <th class='me'>Me</th>
+    <th class='tools'>Tools</th>
   </tr>
   <% @event.games.each do |game| %>
     <tr>
-      <td><%= game.bgg_link.present? ? link_to(game.name, game.bgg_link) : game.name %></td>
-      <td><%= game.min_players%>-<%= game.max_players %></td>
-      <td><%= (game.duration_secs || 0) / 60 %></td>
-      <td><%= game.interests.size %></td>
-      <td><%= render partial: 'my_interests', locals: {game: game} %></td>
-      <td><%= button_to "Edit Game", {controller: :games, action: :edit, id: game.id}, method: :get %></td>
+      <td class='game'><%= game.bgg_link.present? ? link_to(game.name, game.bgg_link) : game.name %></td>
+      <td class='players'><%= game.min_players%>-<%= game.max_players %></td>
+      <td class='length'><%= (game.duration_secs || 0) / 60 %></td>
+      <td class='interested'><%= game.interests.size %></td>
+      <td class='me'><%= render partial: 'my_interests', locals: {game: game} %></td>
+      <td class='tools'><%= button_to "Edit Game", {controller: :games, action: :edit, id: game.id}, method: :get %></td>
     </tr>
   <% end %>
 </table>

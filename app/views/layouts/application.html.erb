@@ -9,7 +9,7 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
+  <body class='<%= @controller.present? ? "ctrl-#@controller" : "" %> <%= @action.present? ? "actn-#@action" : "" %>'>
     <%= render 'layouts/nav' %>
     <%= render 'layouts/flash' %>
     <%= yield %>
