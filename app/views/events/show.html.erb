@@ -15,8 +15,9 @@
     <th class='players'>Players</th>
     <th class='length'>Length</th>
     <th class='interested'># Interested</th>
-    <th class='me'>Me</th>
+    <th class='me'>My Interest</th>
     <th class='tools'>Tools</th>
+    <th class='notes'>My Notes</th>
   </tr>
   <% @event.games.each do |game| %>
     <tr>
@@ -26,6 +27,7 @@
       <td class='interested'><%= game.interests.size %></td>
       <td class='me'><%= render partial: 'my_interests', locals: {game: game} %></td>
       <td class='tools'><%= button_to "Edit Game", {controller: :games, action: :edit, id: game.id}, method: :get %></td>
+      <td class='notes'><%= render partial: 'my_notes', locals: {game: game} %></td>
     </tr>
   <% end %>
 </table>

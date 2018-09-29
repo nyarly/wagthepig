@@ -17,7 +17,7 @@ class InterestsController < ApplicationController
 
   def update
     if @interest.update(interest_params)
-      redirect_to event_path(@interest.game.event_id), notice: 'Interest was successfully updated.'
+      redirect_to event_path(@interest.game.event_id)
     else
       render :edit
     end
@@ -25,7 +25,7 @@ class InterestsController < ApplicationController
 
   def destroy
     @interest.destroy
-    redirect_to event_path(@interest.game.event_id), notice: 'Interest was successfully destroyed.'
+    redirect_to event_path(@interest.game.event_id)
   end
 
   private

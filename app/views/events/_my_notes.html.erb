@@ -1,0 +1,3 @@
+<% if (my_interest = game.interests.find{|i| i.user_id == current_user.id}).present? %>
+  <%= my_interest.notes %>
+<% end %>
