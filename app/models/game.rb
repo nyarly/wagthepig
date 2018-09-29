@@ -5,7 +5,7 @@ class Game < ApplicationRecord
   has_many :users, through: :interests
 
   def duration_minutes
-    duration_secs / 60
+    duration_secs.nil? ? nil : duration_secs / 60
   end
 
   def duration_minutes=(n)
