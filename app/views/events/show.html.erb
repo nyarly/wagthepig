@@ -11,6 +11,7 @@
 
 <table>
   <tr>
+    <th class='thumbnail'>&nbsp;</th>
     <th class='game'>Game</th>
     <th class='players'>Players</th>
     <th class='length'>Length</th>
@@ -20,7 +21,8 @@
     <th class='notes'>My Notes</th>
   </tr>
   <% @event.games.each do |game| %>
-    <tr>
+    <tr data-bggid=<%= game.bgg_id %>>
+      <td class='thumbnail'>&nbsp;</th>
       <td class='game'><%= game.bgg_link.present? ? link_to(game.name, game.bgg_link) : game.name %></td>
       <td class='players'><%= game.min_players%>-<%= game.max_players %></td>
       <td class='length'><%= (game.duration_secs || 0) / 60 %></td>
