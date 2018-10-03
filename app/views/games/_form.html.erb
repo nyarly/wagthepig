@@ -15,6 +15,26 @@
   <div class="field">
     <%= form.label :name %>
     <%= form.text_field :name %>
+    <%= button_tag "Search", type: "button", name: "search" %>
+  </div>
+
+  <div class="search-results" style="display: none">
+    <table>
+      <tr class="header">
+        <th class="thumbnail">Thumb</th>
+        <th class="name">Name</th>
+        <th class="description">Description</th>
+        <th class="tools">Pick</th>
+      </tr>
+      <tr class="result" style="display: none">
+        <td class="thumbnail"><img src="" /></td>
+        <td class="name"></td>
+        <td class="description"></td>
+        <td class="tools">
+          <%= button_tag "Pick", type: "button", name: "pick" %>
+        </td>
+      </tr>
+    </table>
   </div>
 
   <div class="field">
@@ -28,8 +48,8 @@
   </div>
 
   <div class="field">
-    <%= form.label :bgg_link %>
-    <%= form.text_field :bgg_link %>
+    <%= form.label :bgg_id, "BGG id" %>
+    <%= form.text_field :bgg_id %>
   </div>
 
   <div class="field">

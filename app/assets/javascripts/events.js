@@ -29,11 +29,8 @@ function bggIds() {
 
 function enrichFromBGG() {
   for (let id of bggIds()) {
-    xml = fetch('https://www.boardgamegeek.com/xmlapi2/thing?id=' + id)
-      .then( res => res.text() )
-      .then( str => (new window.DOMParser()).parseFromString(str, "text/xml"));
-
-    xml.then( xml => document.evaluate('//thumbnail/text()', xml).iterateNext())
+    getThing(id)
+      .then( xml => document.evaluate('//thumbnail/text()', xml).iterateNext())
       .then((img) => {
           if (img == null) {
             console.log("no thumbnail found", id);
