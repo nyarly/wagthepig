@@ -109,3 +109,4 @@ function wireUpSearchButton() {
 }
 
 window.addEventListener("DOMContentLoaded", wireUpSearchButton);
+window.addEventListener("turbolinks:load", wireUpSearchButton);

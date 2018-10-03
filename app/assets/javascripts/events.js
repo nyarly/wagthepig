@@ -45,3 +45,4 @@ function enrichFromBGG() {
 }
 
 window.addEventListener("DOMContentLoaded", enrichFromBGG);
+window.addEventListener("turbolinks:load", enrichFromBGG);
