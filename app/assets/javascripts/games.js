@@ -103,7 +103,9 @@ function doSearch() {
 
 function wireUpSearchButton() {
   let button = firstMatch(document, '//button[@name="search"]');
-  button.addEventListener('click', doSearch);
+  if (button != null) {
+    button.addEventListener('click', doSearch);
+  }
 }
 
 window.addEventListener("DOMContentLoaded", wireUpSearchButton);

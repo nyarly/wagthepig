@@ -81,12 +81,26 @@ function matchSnapshot(node, xpath) {
 }
 
 var thingCache = {};
+
+function parsingXML(txtP) {
+  return txtP.then( str => (new window.DOMParser()).parseFromString(str, "text/xml"));
+}
+
 function getThing(id) {
   if (thingCache.hasOwnProperty(id)) {
     return thingCache[id]
   }
-  thingCache[id] = fetch('https://www.boardgamegeek.com/xmlapi2/thing?id=' + id)
-      .then( res => res.text() )
-      .then( str => (new window.DOMParser()).parseFromString(str, "text/xml"));
+  stored = window.localStorage.getItem(id);
+  if (stored != null) {
+    thingCache[id] = parsingXML(Promise.resolve(stored))
+  } else {
+    thingCache[id] = parsingXML(fetch('https://www.boardgamegeek.com/xmlapi2/thing?id=' + id)
+      .then( res => res.text())
+      .then( txt => {
+          window.localStorage.setItem(id, txt);
+          return txt
+        })
+    )
+  }
   return thingCache[id]
 }
