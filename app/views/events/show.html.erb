@@ -7,7 +7,10 @@
   <dd><%= @event.where %></dd>
 </dl>
 
-<%= link_to 'Edit', edit_event_path(@event) %>
+<div class="controls">
+  <%= button_to 'Edit', edit_event_path(@event), action: :get %>
+  <%= button_to 'Add a Game', new_game_path(event_id: @event.id), action: :get %>
+</div>
 
 <table>
   <tr>
@@ -33,4 +36,3 @@
     </tr>
   <% end %>
 </table>
-<%= link_to 'Add a Game', new_game_path(event_id: @event.id) %>

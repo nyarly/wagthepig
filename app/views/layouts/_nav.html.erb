@@ -1,4 +1,7 @@
-<ul class="nav">
-  <li><%= button_to "Events", events_path, method: :get %></li>
-  <li><%= button_to "Sign Out", destroy_user_session_path, method: :delete %></li>
-</ul>
+<div class="nav">
+  <%= image_tag "wagthepig-med.png" %>
+  <ul>
+    <li><%= button_to "Events", events_path, method: :get %></li>
+    <li><%= button_to "Sign Out", destroy_user_session_path, method: :delete %></li>
+  </ul>
+</div>
