@@ -8,8 +8,8 @@
 </dl>
 
 <div class="controls">
-  <%= button_to 'Edit', edit_event_path(@event), action: :get %>
-  <%= button_to 'Add a Game', new_game_path(event_id: @event.id), action: :get %>
+  <%= button_to 'Edit', edit_event_path(@event), method: :get %>
+  <%= button_to 'Add a Game', new_game_path, method: :get, params: {event_id: @event.id} %>
 </div>
 
 <table>
