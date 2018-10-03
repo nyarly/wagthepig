@@ -9,7 +9,7 @@ class InterestsController < ApplicationController
     @interest = Interest.new(interest_params)
 
     if @interest.save
-      redirect_to event_path(@interest.game.event_id)
+      redirect_to (event_path(@interest.game.event_id) + "#game-#{@interest.game.id}")
     else
       render :new
     end
@@ -17,7 +17,7 @@ class InterestsController < ApplicationController
 
   def update
     if @interest.update(interest_params)
-      redirect_to event_path(@interest.game.event_id)
+      redirect_to (event_path(@interest.game.event_id) + "#game-#{@interest.game.id}")
     else
       render :edit
     end
@@ -25,7 +25,9 @@ class InterestsController < ApplicationController
 
   def destroy
     @interest.destroy
-    redirect_to event_path(@interest.game.event_id)
+    redirect_to (event_path(@interest.game.event_id) + "#game-#{@interest.game.id}")
+  rescue ActiveRecord::RecordNotFound
+    redirect_to :back
   end
 
   private
