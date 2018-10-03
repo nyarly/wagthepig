@@ -24,7 +24,7 @@
     <tr data-bggid=<%= game.bgg_id %>>
       <td class='thumbnail'>&nbsp;</th>
       <td class='game'><%= game.bgg_link.present? ? link_to(game.name, game.bgg_link) : game.name %></td>
-      <td class='players'><%= game.min_players%>-<%= game.max_players %></td>
+      <td class='players'><%= game.player_range %></td>
       <td class='length'><%= (game.duration_secs || 0) / 60 %></td>
       <td class='interested'><%= game.interests.size %></td>
       <td class='me'><%= render partial: 'my_interests', locals: {game: game} %></td>

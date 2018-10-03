@@ -11,4 +11,28 @@ class Game < ApplicationRecord
   def duration_minutes=(n)
     self.duration_secs = n * 60
   end
+
+  def player_range
+    case [min_players.present?, max_players.present?]
+    when [false, false]
+      ""
+    when [true, false]
+      "#{min_players}"
+    when [false, true]
+      "#{max_players}"
+    when [true, true]
+      if min_players == max_players
+        "#{max_players}"
+      else
+        "#{min_players}-#{max_players}"
+      end
+    end
+  end
+
+  def bgg_link
+    if bgg_id.present?
+      return "https://boardgamegeek.com/boardgame/" + bgg_id
+    end
+    read_attribute(:bgg_link)
+  end
 end
