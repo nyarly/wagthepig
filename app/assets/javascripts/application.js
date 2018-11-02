@@ -80,6 +80,10 @@ function matchSnapshot(node, xpath) {
   }
 }
 
+function classXpath(className) {
+  return "contains(concat(' ', normalize-space(@class), ' '), '" + className + "')"
+}
+
 var thingCache = {};
 
 function parsingXML(txtP) {
@@ -104,3 +108,15 @@ function getThing(id) {
   }
   return thingCache[id]
 }
+
+
+
+
+function makeSortableTablesSortable() {
+  let tables = match(document, '//table[' + classXpath('sortable') + ']')
+  for (let table of tables) {
+    sorttable.makeSortable(table)
+  }
+}
+
+window.addEventListener("turbolinks:load", makeSortableTablesSortable);
