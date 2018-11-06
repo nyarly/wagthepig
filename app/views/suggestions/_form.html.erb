@@ -1,0 +1,17 @@
+<%= form_with(model: @suggestion, method: :get, local: true) do |form| %>
+  <%= form.hidden_field :event_id %>
+
+  <div class="field">
+    <%= form.label :extra_players %>
+    <%= form.number_field :extra_players %>
+  </div>
+
+  <div class="field">
+    <%= form.label :user_ids %>
+    <%= form.collection_select :user_ids, @suggestion.users, :id, :email, {}, {multiple: true} %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit "Let's Play!" %>
+  </div>
+<%end%>

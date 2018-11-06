@@ -1,0 +1,29 @@
+<p>Games for <%= @suggestion.users.map{|u| u.display_name}.join(", ") %> and <%= @suggestion.extra_players %> more.</p>
+<div class="controls">
+  <%= button_to 'Back to the Event', event_path(@suggestion.event_id), method: :get %>
+  <%= form_with url: new_suggestion_path, model: @suggestion, action: :new, method: :get, local: true do |form| %>
+    <%= form.hidden_field :event_id %>
+    <%= form.hidden_field :extra_players %>
+    <%= form.hidden_field :user_ids %>
+
+    <%= form.submit "Revise search" %>
+  <%end%>
+</div>
+<table class='sortable'>
+  <tr>
+    <th class='thumbnail'>&nbsp;</th>
+    <th class='game'>Game</th>
+    <th class='players'>Players</th>
+    <th class='length'>Length</th>
+    <th class='interest_level'># Present Interested</th>
+  </tr>
+  <% @suggestion.games.each do |game| %>
+    <tr id='game-<%= game.id %>' data-bggid=<%= game.bgg_id %>>
+      <td class='thumbnail'>&nbsp;</th>
+      <td class='game'><%= game.bgg_link.present? ? link_to(game.name, game.bgg_link) : game.name %></td>
+      <td class='players'><%= game.player_range %></td>
+      <td class='length'><%= (game.duration_secs || 0) / 60 %></td>
+      <td class='interest_level'><%= game.interest_level %></td>
+    </tr>
+  <% end %>
+</table>

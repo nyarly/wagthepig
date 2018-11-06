@@ -10,6 +10,10 @@
 <div class="controls">
   <%= button_to 'Edit', edit_event_path(@event), method: :get %>
   <%= button_to 'Add a Game', new_game_path, method: :get, params: {event_id: @event.id} %>
+  <%= form_with url: new_suggestion_path, scope: :suggestion, method: :get, local: true do |form| %>
+    <%= form.hidden_field :event_id, value: @event.id %>
+    <%= form.submit "What Should We Play?!" %>
+  <%end%>
 </div>
 
 <table class='sortable'>
@@ -19,6 +23,7 @@
     <th class='players'>Players</th>
     <th class='length'>Length</th>
     <th class='interested'># Interested</th>
+    <th class='added'>Date Added</th>
     <th class='me'>My Interest</th>
     <th class='tools'>Tools</th>
     <th class='notes'>My Notes</th>
@@ -30,6 +35,7 @@
       <td class='players'><%= game.player_range %></td>
       <td class='length'><%= (game.duration_secs || 0) / 60 %></td>
       <td class='interested'><%= game.interests.size %></td>
+      <td class='added'><%= game.updated_at %></td>
       <td class='me'><%= render partial: 'my_interests', locals: {game: game} %></td>
       <td class='tools'><%= button_to "Edit Game", {controller: :games, action: :edit, id: game.id}, method: :get %></td>
       <td class='notes'><%= render partial: 'my_notes', locals: {game: game} %></td>

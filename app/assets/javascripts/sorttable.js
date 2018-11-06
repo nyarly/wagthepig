@@ -31,11 +31,13 @@ sorttable = {
 
     sorttable.DATE_RE = /^(\d\d?)[\/\.-](\d\d?)[\/\.-]((\d\d)?\d\d)$/;
 
+    /*
     forEach(document.getElementsByTagName('table'), function(table) {
       if (table.className.search(/\bsortable\b/) != -1) {
         sorttable.makeSortable(table);
       }
     });
+    */
 
   },
 
@@ -91,19 +93,6 @@ sorttable = {
 	      headrow[i].sorttable_tbody = table.tBodies[0];
 	      dean_addEvent(headrow[i],"click", sorttable.innerSortFunction = function(e) {
 
-          if (this.className.search(/\bsorttable_sorted\b/) != -1) {
-            // if we're already sorted by this column, just
-            // reverse the table, which is quicker
-            sorttable.reverse(this.sorttable_tbody);
-            this.className = this.className.replace('sorttable_sorted',
-                                                    'sorttable_sorted_reverse');
-            this.removeChild(document.getElementById('sorttable_sortfwdind'));
-            sortrevind = document.createElement('span');
-            sortrevind.id = "sorttable_sortrevind";
-            sortrevind.innerHTML = stIsIE ? '&nbsp<font face="webdings">5</font>' : '&nbsp;&#x25B4;';
-            this.appendChild(sortrevind);
-            return;
-          }
           if (this.className.search(/\bsorttable_sorted_reverse\b/) != -1) {
             // if we're already sorted by this column in reverse, just
             // re-reverse the table, which is quicker
@@ -118,6 +107,19 @@ sorttable = {
             return;
           }
 
+          if (this.className.search(/\bsorttable_sorted\b/) != -1) {
+            // if we're already sorted by this column, just
+            // reverse the table, which is quicker
+            sorttable.reverse(this.sorttable_tbody);
+            this.className = this.className.replace('sorttable_sorted',
+                                                    'sorttable_sorted_reverse');
+            this.removeChild(document.getElementById('sorttable_sortfwdind'));
+            sortrevind = document.createElement('span');
+            sortrevind.id = "sorttable_sortrevind";
+            sortrevind.innerHTML = stIsIE ? '&nbsp<font face="webdings">5</font>' : '&nbsp;&#x25B4;';
+            this.appendChild(sortrevind);
+            return;
+          }
           // remove sorttable_sorted classes
           theadrow = this.parentNode;
           forEach(theadrow.childNodes, function(cell) {

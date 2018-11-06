@@ -23,7 +23,11 @@ class GamesController < ApplicationController
     @game.users << current_user
 
     if @game.save
-      redirect_to @game, notice: 'Game was successfully created.'
+      if @game.bgg_id.present?
+        redirect_to @game.event, notice: 'Game was successfully created.'
+      else
+        redirect_to @game, notice: 'Game was successfully created.'
+      end
     else
       render :new
     end
