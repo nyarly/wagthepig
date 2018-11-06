@@ -30,6 +30,7 @@ class Suggestion # not an ActiveRecord!
       .where('coalesce(games.max_players, 9999) >= ?', must_play)
       .where('events.id' => @event_id)
       .where('users.id' => user_ids)
+      .order('interest_level desc')
       .group('games.id')
     @users = User.where(id: user_ids)
     self
