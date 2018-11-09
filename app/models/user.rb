@@ -6,7 +6,12 @@ class User < ApplicationRecord
 
   has_many :interest
 
+  def incomplete?
+    name.blank?
+  end
+
   def display_name
+    return name if name.present?
     email
   end
 end

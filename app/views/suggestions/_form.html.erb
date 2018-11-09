@@ -8,7 +8,7 @@
 
   <div class="field">
     <%= form.label :user_ids %>
-    <%= form.collection_select :user_ids, @suggestion.users, :id, :email, {}, {multiple: true} %>
+    <%= form.collection_select :user_ids, @suggestion.users, :id, :display_name, {}, {multiple: true} %>
   </div>
 
   <div class="actions">

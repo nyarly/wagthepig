@@ -37,7 +37,7 @@
       <td class='interested'><%= game.interests.size %></td>
       <td class='added'><%= game.updated_at %></td>
       <td class='me'><%= render partial: 'my_interests', locals: {game: game} %></td>
-      <td class='tools'><%= button_to "Edit Game", {controller: :games, action: :edit, id: game.id}, method: :get %></td>
+      <td class='tools'><%= render partial: 'game_tools', locals: {game: game} %></td>
       <td class='notes'><%= render partial: 'my_notes', locals: {game: game} %></td>
     </tr>
   <% end %>

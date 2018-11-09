@@ -10,14 +10,19 @@ div.nav {
     display: flex;
     align-items: center;
     justify-content: flex-end;
+
+    a.urgent {
+      padding: 0 0.5em;
+      color: orange;
+    }
+
+    li {
+      display: inline;
+      flex: 0 0 auto;
+    }
   }
 
-  ul li {
-    display: inline;
-    flex: 0 0 auto;
-  }
-
-  .nav form {
+  form {
     display: inline
   }
 }
