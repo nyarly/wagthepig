@@ -1,0 +1,12 @@
+<p>Players interested in <%= @shared_interest.game.name %></p>
+<% if @shared_interest.users.present? %>
+<ul>
+  <% @shared_interest.users.each do |user| %>
+    <li><%= user.display_name %></li>
+  <% end %>
+</ul>
+<% else %>
+  <p>No one!</p>
+<% end %>
+
+<%= button_to "Back", @shared_interest.game.event, method: :get %>
