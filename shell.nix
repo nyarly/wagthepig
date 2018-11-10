@@ -9,5 +9,6 @@ let
   };
 in
   pkgs.mkShell {
-    buildInputs = [rubyEnv nodejs sqlite];
+    # bunder is here so that updates will work
+    buildInputs = [rubyEnv nodejs sqlite bundler];
   }
