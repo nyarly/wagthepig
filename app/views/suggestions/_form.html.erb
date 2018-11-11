@@ -2,13 +2,13 @@
   <%= form.hidden_field :event_id %>
 
   <div class="field">
-    <%= form.label :extra_players %>
-    <%= form.number_field :extra_players %>
+    <%= form.label :user_ids %>
+    <%= form.collection_select :user_ids, @suggestion.users, :id, :display_name, {}, {multiple: true, size: @suggestion.users.length} %>
   </div>
 
   <div class="field">
-    <%= form.label :user_ids %>
-    <%= form.collection_select :user_ids, @suggestion.users, :id, :display_name, {}, {multiple: true} %>
+    <%= form.label :extra_players %>
+    <%= form.number_field :extra_players %>
   </div>
 
   <div class="actions">
