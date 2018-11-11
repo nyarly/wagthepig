@@ -113,7 +113,7 @@ function getThing(id) {
 
 
 function makeSortableTablesSortable() {
-  let tables = match(document, '//table[' + classXpath('sortable') + ']')
+  let tables = matchSnapshot(document, '//table[' + classXpath('sortable') + ']')
   for (let table of tables) {
     sorttable.makeSortable(table)
   }
