@@ -40,9 +40,9 @@ function enrichFromBGG() {
           if (td != null) {
             td.innerHTML = '<img src="' + img.nodeValue + '" />'
           }
+          centerFragmentId();
       })
   }
-  centerFragmentId();
 }
 
 window.addEventListener("DOMContentLoaded", enrichFromBGG);
