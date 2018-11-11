@@ -44,6 +44,10 @@ sorttable = {
   makeSortable: function(table) {
     let store_as = table.getAttribute("sorttable_persist_as")
 
+    function persistedName(store_as) {
+      return "sorttable." + store_as;
+    }
+
     if (table.getElementsByTagName('thead').length == 0) {
       // table doesn't have a tHead. Since it should have, create one and
       // put the first table row in it.
@@ -98,75 +102,102 @@ sorttable = {
           let sort_forwards = !already_sorted || (this.className.search(/\bsorttable_sorted_reverse\b/) != -1)
 
           if (store_as != null) {
-            window.localStorage.setItem("sorttable." + store_as, this.sorttable_columnindex + "-" + sort_forwards);
+            window.localStorage.setItem(persistedName(store_as), this.sorttable_columnindex + "-" + sort_forwards);
           }
 
           if (already_sorted) {
             // if we're already sorted by this column, just
             // reverse the table, which is quicker
             sorttable.reverse(this.sorttable_tbody);
-            if (sort_forwards) {
-              this.className =
-                this.className.replace('sorttable_sorted_reverse', 'sorttable_sorted');
-              this.removeChild(document.getElementById('sorttable_sortrevind'));
-              sortfwdind = document.createElement('span');
-              sortfwdind.id = "sorttable_sortfwdind";
-              sortfwdind.innerHTML = stIsIE ? '&nbsp<font face="webdings">6</font>' : '&nbsp;&#x25BE;';
-              this.appendChild(sortfwdind);
-            } else {
-              this.className =
-                this.className.replace('sorttable_sorted', 'sorttable_sorted_reverse');
-              this.removeChild(document.getElementById('sorttable_sortfwdind'));
-              sortrevind = document.createElement('span');
-              sortrevind.id = "sorttable_sortrevind";
-              sortrevind.innerHTML = stIsIE ? '&nbsp<font face="webdings">5</font>' : '&nbsp;&#x25B4;';
-              this.appendChild(sortrevind);
-            }
+            sorttable.changeMarking.call(this, sort_forwards);
             return;
           }
-          // remove sorttable_sorted classes
-          theadrow = this.parentNode;
-          forEach(theadrow.childNodes, function(cell) {
-            if (cell.nodeType == 1) { // an element
-              cell.className = cell.className.replace('sorttable_sorted_reverse','');
-              cell.className = cell.className.replace('sorttable_sorted','');
-            }
-          });
-          sortfwdind = document.getElementById('sorttable_sortfwdind');
-          if (sortfwdind) { sortfwdind.parentNode.removeChild(sortfwdind); }
-          sortrevind = document.getElementById('sorttable_sortrevind');
-          if (sortrevind) { sortrevind.parentNode.removeChild(sortrevind); }
 
-          this.className += ' sorttable_sorted';
-          sortfwdind = document.createElement('span');
-          sortfwdind.id = "sorttable_sortfwdind";
-          sortfwdind.innerHTML = stIsIE ? '&nbsp<font face="webdings">6</font>' : '&nbsp;&#x25BE;';
-          this.appendChild(sortfwdind);
-
-	        // build an array to sort. This is a Schwartzian transform thing,
-	        // i.e., we "decorate" each row with the actual sort key,
-	        // sort based on the sort keys, and then put the rows back in order
-	        // which is a lot faster because you only do getInnerText once per row
-	        row_array = [];
-	        col = this.sorttable_columnindex;
-	        rows = this.sorttable_tbody.rows;
-	        for (var j=0; j<rows.length; j++) {
-	          row_array[row_array.length] = [sorttable.getInnerText(rows[j].cells[col]), rows[j]];
-	        }
-	        /* If you want a stable sort, uncomment the following line */
-	        //sorttable.shaker_sort(row_array, this.sorttable_sortfunction);
-	        /* and comment out this one */
-	        row_array.sort(this.sorttable_sortfunction);
-
-	        tb = this.sorttable_tbody;
-	        for (var j=0; j<row_array.length; j++) {
-	          tb.appendChild(row_array[j][1]);
-	        }
-
-	        delete row_array;
+          sorttable.fullSort.call(this);
 	      });
 	    }
     }
+
+    if (store_as != null) {
+      let persistedSort = window.localStorage.getItem(persistedName(store_as));
+      if (persistedSort == null) {
+        return;
+      }
+      let persistedParts = persistedSort.split("-");
+      let colIndex =  new Number(persistedParts[0]);
+      let sort_forwards = ("false" != persistedParts[1]);
+
+      let header = headrow[colIndex];
+      sorttable.fullSort.call(header)
+      if (!sort_forwards) {
+        sorttable.reverse(header.sorttable_tbody);
+        sorttable.changeMarking.call(header, sort_forwards);
+      }
+    }
+
+  },
+
+  changeMarking: function(sort_forwards) {
+    if (sort_forwards) {
+      this.className =
+        this.className.replace('sorttable_sorted_reverse', 'sorttable_sorted');
+      this.removeChild(document.getElementById('sorttable_sortrevind'));
+      sortfwdind = document.createElement('span');
+      sortfwdind.id = "sorttable_sortfwdind";
+      sortfwdind.innerHTML = stIsIE ? '&nbsp<font face="webdings">6</font>' : '&nbsp;&#x25BE;';
+      this.appendChild(sortfwdind);
+    } else {
+      this.className =
+        this.className.replace('sorttable_sorted', 'sorttable_sorted_reverse');
+      this.removeChild(document.getElementById('sorttable_sortfwdind'));
+      sortrevind = document.createElement('span');
+      sortrevind.id = "sorttable_sortrevind";
+      sortrevind.innerHTML = stIsIE ? '&nbsp<font face="webdings">5</font>' : '&nbsp;&#x25B4;';
+      this.appendChild(sortrevind);
+    }
+  },
+
+  fullSort: function() {
+    // remove sorttable_sorted classes
+    theadrow = this.parentNode;
+    forEach(theadrow.childNodes, function(cell) {
+        if (cell.nodeType == 1) { // an element
+          cell.className = cell.className.replace('sorttable_sorted_reverse','');
+          cell.className = cell.className.replace('sorttable_sorted','');
+        }
+      });
+    sortfwdind = document.getElementById('sorttable_sortfwdind');
+    if (sortfwdind) { sortfwdind.parentNode.removeChild(sortfwdind); }
+    sortrevind = document.getElementById('sorttable_sortrevind');
+    if (sortrevind) { sortrevind.parentNode.removeChild(sortrevind); }
+
+    this.className += ' sorttable_sorted';
+    sortfwdind = document.createElement('span');
+    sortfwdind.id = "sorttable_sortfwdind";
+    sortfwdind.innerHTML = stIsIE ? '&nbsp<font face="webdings">6</font>' : '&nbsp;&#x25BE;';
+    this.appendChild(sortfwdind);
+
+    // build an array to sort. This is a Schwartzian transform thing,
+    // i.e., we "decorate" each row with the actual sort key,
+    // sort based on the sort keys, and then put the rows back in order
+    // which is a lot faster because you only do getInnerText once per row
+    row_array = [];
+    col = this.sorttable_columnindex;
+    rows = this.sorttable_tbody.rows;
+    for (var j=0; j<rows.length; j++) {
+      row_array[row_array.length] = [sorttable.getInnerText(rows[j].cells[col]), rows[j]];
+    }
+    /* If you want a stable sort, uncomment the following line */
+    //sorttable.shaker_sort(row_array, this.sorttable_sortfunction);
+    /* and comment out this one */
+    row_array.sort(this.sorttable_sortfunction);
+
+    tb = this.sorttable_tbody;
+    for (var j=0; j<row_array.length; j++) {
+      tb.appendChild(row_array[j][1]);
+    }
+
+    delete row_array;
   },
 
   guessType: function(table, column) {
