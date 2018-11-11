@@ -133,12 +133,6 @@ sorttable = {
         sorttable.reverse(header.sorttable_tbody);
         sorttable.changeMarking.call(header, sort_forwards);
       }
-
-      if (window.location.hash != null && window.location.hash != "") {
-        let id = window.location.hash.replace(new RegExp('^#'),'')
-        let elem = document.getElementById(id);
-        elem.scrollIntoView({block: "center"});
-      }
     }
 
   },

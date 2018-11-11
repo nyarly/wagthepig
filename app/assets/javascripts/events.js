@@ -42,6 +42,7 @@ function enrichFromBGG() {
           }
       })
   }
+  centerFragmentId();
 }
 
 window.addEventListener("DOMContentLoaded", enrichFromBGG);

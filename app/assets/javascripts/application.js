@@ -110,13 +110,21 @@ function getThing(id) {
 }
 
 
+function centerFragmentId() {
+  if (window.location.hash != null && window.location.hash != "") {
+    let id = window.location.hash.replace(new RegExp('^#'),'')
+    let elem = document.getElementById(id);
+    elem.scrollIntoView({block: "center"});
+  }
+}
 
 
 function makeSortableTablesSortable() {
   let tables = matchSnapshot(document, '//table[' + classXpath('sortable') + ']')
   for (let table of tables) {
-    sorttable.makeSortable(table)
+    sorttable.makeSortable(table);
   }
+  centerFragmentId();
 }
 
 window.addEventListener("turbolinks:load", makeSortableTablesSortable);
