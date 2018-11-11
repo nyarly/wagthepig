@@ -35,4 +35,16 @@ class Game < ApplicationRecord
     end
     read_attribute(:bgg_link)
   end
+
+  def user_interest(user)
+    interests.find{|i| i.user_id == user.id}
+  end
+
+  def interest_sort_key(user)
+    if user_interest(user).present?
+      "interested"
+    else
+      "not interested"
+    end
+  end
 end

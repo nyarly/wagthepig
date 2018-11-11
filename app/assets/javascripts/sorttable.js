@@ -42,6 +42,8 @@ sorttable = {
   },
 
   makeSortable: function(table) {
+    let store_as = table.getAttribute("sorttable_persist_as")
+
     if (table.getElementsByTagName('thead').length == 0) {
       // table doesn't have a tHead. Since it should have, create one and
       // put the first table row in it.
@@ -92,32 +94,34 @@ sorttable = {
 	      headrow[i].sorttable_columnindex = i;
 	      headrow[i].sorttable_tbody = table.tBodies[0];
 	      dean_addEvent(headrow[i],"click", sorttable.innerSortFunction = function(e) {
+          let already_sorted = (this.className.search(/\bsorttable_sorted/) != -1);
+          let sort_forwards = !already_sorted || (this.className.search(/\bsorttable_sorted_reverse\b/) != -1)
 
-          if (this.className.search(/\bsorttable_sorted_reverse\b/) != -1) {
-            // if we're already sorted by this column in reverse, just
-            // re-reverse the table, which is quicker
-            sorttable.reverse(this.sorttable_tbody);
-            this.className = this.className.replace('sorttable_sorted_reverse',
-                                                    'sorttable_sorted');
-            this.removeChild(document.getElementById('sorttable_sortrevind'));
-            sortfwdind = document.createElement('span');
-            sortfwdind.id = "sorttable_sortfwdind";
-            sortfwdind.innerHTML = stIsIE ? '&nbsp<font face="webdings">6</font>' : '&nbsp;&#x25BE;';
-            this.appendChild(sortfwdind);
-            return;
+          if (store_as != null) {
+            window.localStorage.setItem("sorttable." + store_as, this.sorttable_columnindex + "-" + sort_forwards);
           }
 
-          if (this.className.search(/\bsorttable_sorted\b/) != -1) {
+          if (already_sorted) {
             // if we're already sorted by this column, just
             // reverse the table, which is quicker
             sorttable.reverse(this.sorttable_tbody);
-            this.className = this.className.replace('sorttable_sorted',
-                                                    'sorttable_sorted_reverse');
-            this.removeChild(document.getElementById('sorttable_sortfwdind'));
-            sortrevind = document.createElement('span');
-            sortrevind.id = "sorttable_sortrevind";
-            sortrevind.innerHTML = stIsIE ? '&nbsp<font face="webdings">5</font>' : '&nbsp;&#x25B4;';
-            this.appendChild(sortrevind);
+            if (sort_forwards) {
+              this.className =
+                this.className.replace('sorttable_sorted_reverse', 'sorttable_sorted');
+              this.removeChild(document.getElementById('sorttable_sortrevind'));
+              sortfwdind = document.createElement('span');
+              sortfwdind.id = "sorttable_sortfwdind";
+              sortfwdind.innerHTML = stIsIE ? '&nbsp<font face="webdings">6</font>' : '&nbsp;&#x25BE;';
+              this.appendChild(sortfwdind);
+            } else {
+              this.className =
+                this.className.replace('sorttable_sorted', 'sorttable_sorted_reverse');
+              this.removeChild(document.getElementById('sorttable_sortfwdind'));
+              sortrevind = document.createElement('span');
+              sortrevind.id = "sorttable_sortrevind";
+              sortrevind.innerHTML = stIsIE ? '&nbsp<font face="webdings">5</font>' : '&nbsp;&#x25B4;';
+              this.appendChild(sortrevind);
+            }
             return;
           }
           // remove sorttable_sorted classes

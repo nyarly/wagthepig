@@ -1,4 +1,4 @@
-<% if (my_interest = game.interests.find{|i| i.user_id == current_user.id}).present? %>
+<% if (my_interest = game.user_interest(current_user)).present? %>
   <%= button_to "Notes", edit_interest_path(my_interest.id), method: :get %>
   <%= button_to "Never mind", interest_path(my_interest.id), method: :delete %>
 <% else %>

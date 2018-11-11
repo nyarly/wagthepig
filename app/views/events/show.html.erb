@@ -16,17 +16,17 @@
   <%end%>
 </div>
 
-<table class='sortable'>
+<table class='sortable' sorttable_persist_as='events'>
   <tr>
-    <th class='thumbnail'>&nbsp;</th>
+    <th class='thumbnail sorttable_nosort'>&nbsp;</th>
     <th class='game'>Game</th>
     <th class='players'>Players</th>
     <th class='length'>Length</th>
     <th class='interested'># Interested</th>
     <th class='added'>Date Added</th>
     <th class='me'>My Interest</th>
-    <th class='tools'>Tools</th>
-    <th class='notes'>My Notes</th>
+    <th class='tools sorttable_nosort'>Tools</th>
+    <th class='notes sorttable_nosort'>My Notes</th>
   </tr>
   <% @event.games.each do |game| %>
     <tr id='game-<%= game.id %>' data-bggid=<%= game.bgg_id %>>
@@ -35,8 +35,8 @@
       <td class='players'><%= game.player_range %></td>
       <td class='length'><%= (game.duration_secs || 0) / 60 %></td>
       <td class='interested'><%= game.interests.size %></td>
-      <td class='added'><%= game.updated_at %></td>
-      <td class='me'><%= render partial: 'my_interests', locals: {game: game} %></td>
+      <td class='added' sorttable_customkey='<%= game.updated_at %>'><%= game.updated_at.to_s(:short_date)%></td>
+      <td class='me' sorttable_customkey="<%= game.interest_sort_key(current_user) %>"><%= render partial: 'my_interests', locals: {game: game} %></td>
       <td class='tools'><%= render partial: 'game_tools', locals: {game: game} %></td>
       <td class='notes'><%= render partial: 'my_notes', locals: {game: game} %></td>
     </tr>
