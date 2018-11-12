@@ -23,20 +23,24 @@
     <th class='players'>Players</th>
     <th class='length'>Length</th>
     <th class='interested'># Interested</th>
+    <th class='teachers'># Teachers</th>
     <th class='added'>Date Added</th>
     <th class='me'>My Interest</th>
     <th class='tools sorttable_nosort'>Tools</th>
     <th class='notes sorttable_nosort'>My Notes</th>
   </tr>
   <% @event.games.each do |game| %>
-    <tr id='game-<%= game.id %>' data-bggid=<%= game.bgg_id %>>
+    <tr class='<%= game.user_interest(current_user).classname %>' id='game-<%= game.id %>' data-bggid=<%= game.bgg_id %>>
       <td class='thumbnail'>&nbsp;</th>
       <td class='game'><%= game.bgg_link.present? ? link_to(game.name, game.bgg_link) : game.name %></td>
       <td class='players'><%= game.player_range %></td>
       <td class='length'><%= (game.duration_secs || 0) / 60 %></td>
       <td class='interested'><%= game.interests.size %></td>
+      <td class='teachers'><%= game.interests.count(&:can_teach)%></td>
       <td class='added' sorttable_customkey='<%= game.updated_at %>'><%= game.updated_at.to_s(:short_date)%></td>
-      <td class='me' sorttable_customkey="<%= game.interest_sort_key(current_user) %>"><%= render partial: 'my_interests', locals: {game: game} %></td>
+      <td class='me' sorttable_customkey="<%= game.user_interest(current_user).sort_key %>">
+        <%= render partial: 'my_interests', locals: {game: game} %>
+      </td>
       <td class='tools'><%= render partial: 'game_tools', locals: {game: game} %></td>
       <td class='notes'><%= render partial: 'my_notes', locals: {game: game} %></td>
     </tr>

@@ -1,10 +1,32 @@
 <% if (my_interest = game.user_interest(current_user)).present? %>
+  <% if my_interest.can_teach %>
+    <%= form_with model: my_interest, class: 'button_to', method: :put, remote: true do |form| %>
+      <%= hidden_field_tag 'interest[game_id]', game.id %>
+      <%= hidden_field_tag 'interest[user_id]', current_user.id %>
+      <%= hidden_field_tag 'interest[can_teach]', true %>
+      <%= button_tag "Decline Teaching" %>
+    <% end %>
+  <% else %>
+    <%= form_with model: my_interest, class: 'button_to', method: :put, remote: true do |form| %>
+      <%= hidden_field_tag 'interest[game_id]', game.id %>
+      <%= hidden_field_tag 'interest[user_id]', current_user.id %>
+      <%= hidden_field_tag 'interest[can_teach]', true %>
+      <%= button_tag "Offer to Teach" %>
+    <% end %>
+  <% end %>
   <%= button_to "Notes", edit_interest_path(my_interest.id), method: :get %>
   <%= button_to "Never mind", interest_path(my_interest.id), method: :delete %>
 <% else %>
   <%= form_with class: 'button_to', url: interests_path, remote: true do |form| %>
     <%= hidden_field_tag 'interest[game_id]', game.id %>
     <%= hidden_field_tag 'interest[user_id]', current_user.id %>
+    <%= hidden_field_tag 'interest[can_teach]', false %>
     <%= button_tag "Express interest in playing" %>
+  <% end %>
+  <%= form_with class: 'button_to', url: interests_path, remote: true do |form| %>
+    <%= hidden_field_tag 'interest[game_id]', game.id %>
+    <%= hidden_field_tag 'interest[user_id]', current_user.id %>
+    <%= hidden_field_tag 'interest[can_teach]', true %>
+    <%= button_tag "Express interest in teaching" %>
   <% end %>
 <% end %>
