@@ -3,7 +3,7 @@
     <%= form_with model: my_interest, class: 'button_to', method: :put, remote: true do |form| %>
       <%= hidden_field_tag 'interest[game_id]', game.id %>
       <%= hidden_field_tag 'interest[user_id]', current_user.id %>
-      <%= hidden_field_tag 'interest[can_teach]', true %>
+      <%= hidden_field_tag 'interest[can_teach]', false %>
       <%= button_tag "Decline Teaching" %>
     <% end %>
   <% else %>
