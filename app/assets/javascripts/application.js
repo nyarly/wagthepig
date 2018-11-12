@@ -127,4 +127,21 @@ function makeSortableTablesSortable() {
   centerFragmentId();
 }
 
+function bggThumbnails() {
+  for (let img of matchSnapshot(document, "//img[@data-bggid!='']")) {
+    let id = firstMatch(img, './@data-bggid')
+    getThing(id.value)
+      .then( xml => document.evaluate('//thumbnail/text()', xml).iterateNext())
+      .then((src) => {
+          if (src == null) {
+            console.log("no thumbnail found", id);
+            return
+          }
+          img.setAttribute('src', src.data)
+          centerFragmentId();
+      })
+  }
+}
+
 window.addEventListener("turbolinks:load", makeSortableTablesSortable);
+window.addEventListener("turbolinks:load", bggThumbnails);

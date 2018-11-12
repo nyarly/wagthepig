@@ -54,7 +54,6 @@ function injectSearchResult(game) {
   let resultRow = firstMatch(document, '//div[@class="search-results"]//tr[@class="result"]').cloneNode(true);
   let name = firstMatch(resultRow, './/td[@class="name"]')
   name.innerText = game.name;
-  resultRow.setAttribute("data-bggid", game.id);
   resultRow.setAttribute("style", "");
   resultTable.appendChild(resultRow);
   let pickBtn = firstMatch(resultRow, './/button[@name="pick"]');

@@ -20,10 +20,10 @@
     <th class='shared sorttable_nosort'>&nbsp;</th>
   </tr>
   <% @suggestion.games.each do |game| %>
-    <tr id='game-<%= game.id %>' data-bggid=<%= game.bgg_id %>>
-      <td class='thumbnail'>&nbsp;</td>
+    <tr id='game-<%= game.id %>' >
+      <td class='thumbnail'><img data-bggid='<%= game.bgg_id %>' /></td>
       <td class='game'><%= game.bgg_link.present? ? link_to(game.name, game.bgg_link) : game.name %></td>
-      <td class='players'><%= game.player_range %></td>
+      <td class='players' sorttable_customkey='<%= game.min_players %>'><%= game.player_range %></td>
       <td class='length'><%= (game.duration_secs || 0) / 60 %></td>
       <td class='interest_level'><%= game.interest_level %></td>
       <td class='teachers'><%= game.teachers %></td>
