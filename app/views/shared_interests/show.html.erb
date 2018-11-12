@@ -1,10 +1,21 @@
 <p>Players interested in <%= @shared_interest.game.name %></p>
+<h2>Teachers</h2>
+<% if @shared_interest.teachers.present? %>
+  <ul>
+    <% @shared_interest.teachers.each do |user| %>
+      <li><%= user.display_name %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>None!</p>
+<% end %>
+<h2>Other Players</h2>
 <% if @shared_interest.users.present? %>
-<ul>
-  <% @shared_interest.users.each do |user| %>
-    <li><%= user.display_name %></li>
-  <% end %>
-</ul>
+  <ul>
+    <% @shared_interest.users.each do |user| %>
+      <li><%= user.display_name %></li>
+    <% end %>
+  </ul>
 <% else %>
   <p>No one!</p>
 <% end %>
