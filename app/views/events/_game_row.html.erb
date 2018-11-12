@@ -7,8 +7,52 @@
   <td class='teachers'><%= game.interests.count(&:can_teach)%></td>
   <td class='added' sorttable_customkey='<%= game.updated_at %>'><%= game.updated_at.to_s(:short_date)%></td>
   <td class='me' sorttable_customkey="<%= game.user_interest(current_user).sort_key %>">
-    <%= render partial: 'my_interests', locals: {game: game} %>
+    <%# = render partial: 'my_interests', locals: {game: game} %>
+    <% if (my_interest = game.user_interest(current_user)).present? %>
+      <% if my_interest.can_teach %>
+        <%= form_with model: my_interest, class: 'button_to', method: :put, remote: true do |form| %>
+          <%= hidden_field_tag 'interest[game_id]', game.id %>
+          <%= hidden_field_tag 'interest[user_id]', current_user.id %>
+          <%= hidden_field_tag 'interest[can_teach]', false %>
+          <%= button_tag "Won't Teach!" %>
+        <% end %>
+      <% else %>
+        <%= form_with model: my_interest, class: 'button_to', method: :put, remote: true do |form| %>
+          <%= hidden_field_tag 'interest[game_id]', game.id %>
+          <%= hidden_field_tag 'interest[user_id]', current_user.id %>
+          <%= hidden_field_tag 'interest[can_teach]', true %>
+          <%= button_tag "Want to Teach!" %>
+        <% end %>
+      <% end %>
+      <%= button_to(edit_interest_path(my_interest.id), method: :get){ "Notes" } %>
+      <%= button_to(interest_path(my_interest.id), method: :delete){ "Never mind" } %>
+    <% else %>
+      <%= form_with class: 'button_to', url: interests_path, remote: true do |form| %>
+        <%= hidden_field_tag 'interest[game_id]', game.id %>
+        <%= hidden_field_tag 'interest[user_id]', current_user.id %>
+        <%= hidden_field_tag 'interest[can_teach]', false %>
+        <%= button_tag "Want to Play!" %>
+      <% end %>
+      <%= form_with class: 'button_to', url: interests_path, remote: true do |form| %>
+        <%= hidden_field_tag 'interest[game_id]', game.id %>
+        <%= hidden_field_tag 'interest[user_id]', current_user.id %>
+        <%= hidden_field_tag 'interest[can_teach]', true %>
+        <%= button_tag "Want to Teach!" %>
+      <% end %>
+    <% end %>
   </td>
-  <td class='tools'><%= render partial: 'game_tools', locals: {game: game} %></td>
-  <td class='notes'><%= render partial: 'my_notes', locals: {game: game} %></td>
+  <td class='tools'>
+    <%#= render partial: 'game_tools', locals: {game: game} %>
+    <%= button_to({controller: :games, action: :edit, id: game.id}, method: :get){ "Edit Game" } %>
+    <%= form_with class: 'button_to', url: shared_interests_path, method: :get, local: true do |form| %>
+      <%= form.hidden_field :game_id, value: game.id %>
+      <%= form.button "Who Else?" %>
+    <%end%>
+  </td>
+  <td class='notes'>
+    <%#= render partial: 'my_notes', locals: {game: game} %>
+    <% if (my_interest = game.interests.find{|i| i.user_id == current_user.id}).present? %>
+      <%= my_interest.notes %>
+    <% end %>
+  </td>
 </tr>
