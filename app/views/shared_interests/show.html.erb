@@ -20,5 +20,4 @@
 <% else %>
   <p>No one!</p>
 <% end %>
-
-<%= button_to "Back", @shared_interest.game.event, method: :get %>
+<%= button_to(@shared_interest.game.event, method: :get){ "Back" } %>

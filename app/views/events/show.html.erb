@@ -8,11 +8,11 @@
 </dl>
 
 <div class="controls">
-  <%= button_to 'Edit', edit_event_path(@event), method: :get %>
-  <%= button_to 'Add a Game', new_game_path, method: :get, params: {event_id: @event.id} %>
+  <%= button_to(edit_event_path(@event), method: :get) { "Edit" } %>
+  <%= button_to(new_game_path, method: :get, params: {event_id: @event.id}){'Add a Game'} %>
   <%= form_with url: new_suggestion_path, class: 'button_to', scope: :suggestion, method: :get, local: true do |form| %>
     <%= form.hidden_field :event_id, value: @event.id %>
-    <%= form.submit "What Should We Play?!" %>
+    <%= form.button "What Should We Play?!" %>
   <%end%>
 </div>
 

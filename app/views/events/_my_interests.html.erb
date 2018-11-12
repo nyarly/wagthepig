@@ -14,8 +14,8 @@
       <%= button_tag "Offer to Teach" %>
     <% end %>
   <% end %>
-  <%= button_to "Notes", edit_interest_path(my_interest.id), method: :get %>
-  <%= button_to "Never mind", interest_path(my_interest.id), method: :delete %>
+  <%= button_to(edit_interest_path(my_interest.id), method: :get){ "Notes" } %>
+  <%= button_to(interest_path(my_interest.id), method: :delete){ "Never mind" } %>
 <% else %>
   <%= form_with class: 'button_to', url: interests_path, remote: true do |form| %>
     <%= hidden_field_tag 'interest[game_id]', game.id %>

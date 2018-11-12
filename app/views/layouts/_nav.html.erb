@@ -4,8 +4,8 @@
     <% if current_user && current_user.incomplete? %>
       <li><%= link_to "Your profile is incomplete! Add your name!", edit_user_registration_path, method: :get, class: :urgent %></li>
     <%end%>
-    <li><%= button_to "Profile", edit_user_registration_path, method: :get %></li>
-    <li><%= button_to "Events", events_path, method: :get %></li>
-    <li><%= button_to "Sign Out", destroy_user_session_path, method: :delete %></li>
+    <li><%= button_to(edit_user_registration_path, method: :get){ "Profile" } %></li>
+    <li><%= button_to(events_path, method: :get){ "Events" } %></li>
+    <li><%= button_to(destroy_user_session_path, method: :delete){ "Sign Out"} %></li>
   </ul>
 </div>

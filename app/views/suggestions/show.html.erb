@@ -1,12 +1,12 @@
 <p>Games for <%= @suggestion.users.map{|u| u.display_name}.join(", ") %> and <%= @suggestion.extra_players %> more.</p>
 <div class="controls">
-  <%= button_to 'Back to the Event', event_path(@suggestion.event_id), method: :get %>
+  <%= button_to(event_path(@suggestion.event_id), method: :get){'Back to the Event'} %>
   <%= form_with url: new_suggestion_path, model: @suggestion, action: :new, method: :get, class: 'button_to', local: true do |form| %>
     <%= form.hidden_field :event_id %>
     <%= form.hidden_field :extra_players %>
     <%= form.hidden_field :user_ids %>
 
-    <%= form.submit "Revise search" %>
+    <%= form.button "Revise search" %>
   <%end%>
 </div>
 <table class='sortable' sorttable_persist_as='suggestions'>

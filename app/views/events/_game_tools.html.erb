@@ -1,5 +1,5 @@
-<%= button_to "Edit Game", {controller: :games, action: :edit, id: game.id}, method: :get %>
+<%= button_to({controller: :games, action: :edit, id: game.id}, method: :get){ "Edit Game" } %>
 <%= form_with class: 'button_to', url: shared_interests_path, method: :get, local: true do |form| %>
   <%= form.hidden_field :game_id, value: game.id %>
-  <%= form.submit "Who's Interested?" %>
+  <%= form.button "Who's Interested?" %>
 <%end%>
