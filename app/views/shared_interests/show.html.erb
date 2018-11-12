@@ -1,4 +1,5 @@
-<p>Players interested in <%= @shared_interest.game.name %></p>
+<img data-bggid='<%= @shared_interest.game.bgg_id %>' />
+<h1>Players interested in <%= @shared_interest.game.name %></h1>
 <h2>Teachers</h2>
 <% if @shared_interest.teachers.present? %>
   <ul>
