@@ -14,7 +14,7 @@ function searchResults(q) {
   if (q.length < 4) {
     q = q+"&exact=1";
   }
-  let rz = fetch("https://www.boardgamegeek.com/xmlapi2/search?type=boardgame,boardgameexpansion&query=" + q)
+  let rz = fetch("https://www.boardgamegeek.com/xmlapi2/search?type=boardgame,boardgameexpansion,rpgitem&query=" + q)
       .then( res => res.text() )
       .then( str => (new window.DOMParser()).parseFromString(str, "text/xml"));
 
@@ -42,6 +42,7 @@ function searchResults(q) {
 }
 
 function clearSearchResults() {
+  firstMatch(document, '//div[@class="search-results"]').style = "display: none";
   let rows = matchSnapshot(document, '//div[@class="search-results"]//tr[@style=""]')
   for (let row of rows) {
     row.parentNode.removeChild(row);
@@ -82,7 +83,7 @@ function doPick(id) {
       setFrom(xml, '//minplayers/@value', '//input[@name="game[min_players]"]');
       setFrom(xml, '//maxplayers/@value', '//input[@name="game[max_players]"]');
       setFrom(xml, '//maxplaytime/@value', '//input[@name="game[duration_minutes]"]');
-      setFrom(xml, '//item[@type="boardgame" or @type="boardgameexpansion"]/@id', '//input[@name="game[bgg_id]"]');
+      setFrom(xml, '//item[@type="boardgame" or @type="boardgameexpansion" or @type="rpgitem"]/@id', '//input[@name="game[bgg_id]"]');
     })
 }
 
