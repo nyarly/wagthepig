@@ -43,8 +43,8 @@
   .controls {
     margin: 2em 0;
   }
-  td.me {
-    div.interest {
+  td.me, td.tools {
+    div {
       display: flex;
       flex-direction: column;
     }
@@ -58,6 +58,12 @@
         width: 1em;
       }
     }
+  }
+  td.me button {
+    width: 9.5em;
+  }
+  td.tools button {
+    width: 6em;
   }
   td.notes .icon {
     height: 1em;
@@ -137,6 +143,10 @@
     }
     td.tools {
       grid-area: 7 / 1 / 7 / 3;
+      div {
+        flex-direction: row;
+        justify-content: center;
+      }
     }
     td.notes {
       grid-area: 8 / 1 / 8 / 3;

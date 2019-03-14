@@ -47,11 +47,16 @@
   </td>
   <td class='tools'>
     <%#= render partial: 'game_tools', locals: {game: game} %>
-    <%= button_to({controller: :games, action: :edit, id: game.id}, method: :get){ "Edit" } %>
-    <%= form_with class: 'button_to', url: shared_interests_path, method: :get, local: true do |form| %>
-      <%= form.hidden_field :game_id, value: game.id %>
-      <%= form.button "Who Else?" %>
-    <%end%>
+    <div>
+      <%= button_to({controller: :games, action: :edit, id: game.id}, method: :get) do %>
+        Edit
+        <%= svg_icon("pencil") %>
+      <% end %>
+      <%= form_with class: 'button_to', url: shared_interests_path, method: :get, local: true do |form| %>
+        <%= form.hidden_field :game_id, value: game.id %>
+        <%= form.button "Who Else?" %>
+      <%end%>
+    </div>
   </td>
   <td class='notes'>
     <%#= render partial: 'my_notes', locals: {game: game} %>
