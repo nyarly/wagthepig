@@ -58,6 +58,9 @@
     <% if (my_interest = game.interests.find{|i| i.user_id == current_user.id}).present? %>
       <% if my_interest.notes.present? %>
         <%= my_interest.notes %>
+        <%= link_to(edit_interest_path(my_interest.id), method: :get) do %>
+          <%= svg_icon("pencil") %>
+        <% end %>
       <% else %>
         <%= button_to(edit_interest_path(my_interest.id), method: :get){ "Add Notes" } %>
       <% end %>
