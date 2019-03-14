@@ -1,5 +1,9 @@
 module ApplicationHelper
   def svg_icon(name)
-    "<svg class=\"icon icon-#{name}\"><use xlink:href=\"#icon-#{name}\"></use></svg>".html_safe
+    <<~EOSTRING.html_safe
+      <svg class="icon icon-#{name}">
+        <use xlink:href="#icon-#{name}"></use>
+      </svg>
+    EOSTRING
   end
 end
