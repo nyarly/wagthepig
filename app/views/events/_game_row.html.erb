@@ -14,7 +14,7 @@
           <%= hidden_field_tag 'interest[game_id]', game.id %>
           <%= hidden_field_tag 'interest[user_id]', current_user.id %>
           <%= button_tag do %>
-            <span>Play:</span>
+            <span>I want to play</span>
             <%= svg_icon('checkbox-checked') %>
           <% end %>
         <% end %>
@@ -24,7 +24,7 @@
           <%= hidden_field_tag 'interest[user_id]', current_user.id %>
           <%= hidden_field_tag 'interest[can_teach]', !my_interest.can_teach %>
           <%= button_tag do %>
-            <span>Teach:</span>
+            <span>I know the rules</span>
             <%= svg_icon("checkbox-#{my_interest.can_teach ? '' : 'un'}checked") %>
           <% end %>
         <% end %>
@@ -34,12 +34,12 @@
           <%= hidden_field_tag 'interest[game_id]', game.id %>
           <%= hidden_field_tag 'interest[user_id]', current_user.id %>
           <%= button_tag do %>
-            <span>Play:</span>
+            <span>I want to play</span>
             <%= svg_icon('checkbox-unchecked') %>
           <% end %>
         <% end %>
         <%= button_tag(disabled: true) do %>
-          <span>Teach:</span>
+          <span>I know the rules</span>
           <%= svg_icon("checkbox-unchecked") %>
         <% end %>
       <% end %>

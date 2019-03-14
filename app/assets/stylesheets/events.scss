@@ -49,7 +49,7 @@
       flex-direction: column;
     }
     button {
-      width: 6em;
+      width: 9.5em;
       display: flex;
       flex-direction: row;
       justify-content: space-between;
@@ -134,9 +134,6 @@
     td.me {
       grid-area: 2 / 2 / 6 / 2;
       justify-self: center;
-      &::before {
-        content: "I want to:"
-      }
     }
     td.tools {
       grid-area: 7 / 1 / 7 / 3;
