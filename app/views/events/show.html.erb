@@ -1,11 +1,8 @@
-<dl class='event-data'>
-  <dt>Name:</dt>
-  <dd><%= @event.name %></dd>
-  <dt>Date:</dt>
-  <dd><%= @event.date %></dd>
-  <dt>Where:</dt>
-  <dd><%= @event.where %></dd>
-</dl>
+<h1><%= @event.name %></h1>
+<h2>
+  <div class='item'><%= @event.date %></div>
+  <div class='item'>&nbsp;at <%= @event.where %></div>
+</h2>
 
 <div class="controls">
   <%= button_to(edit_event_path(@event), method: :get) { "Edit" } %>

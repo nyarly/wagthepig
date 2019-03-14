@@ -1,4 +1,10 @@
 div.nav {
+  .logo {
+    background: url('wagthepig-med.png') no-repeat;
+    background-size: contain;
+    margin: 1rem 0 0 1rem;
+  }
+
   display: flex;
   justify-content: space-between;
   align-items: center;

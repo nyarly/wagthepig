@@ -16,3 +16,13 @@
 table.sortable th:not(.sorttable_sorted):not(.sorttable_sorted_reverse):not(.sorttable_nosort):after {
     content: " \25B4\25BE"
 }
+
+h1 {
+  font-size: 200%;
+  font-weight: bold;
+}
+h2 {
+  font-size: 140%;
+  font-style: italic;
+  color: #666;
+}

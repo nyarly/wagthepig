@@ -3,19 +3,8 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .ctrl-events {
-  dl.event-data {
-    dt, dd {
-      display: inline-block
-    }
-
-    dt {
-      font-weight: bolder
-    }
-
-
-    dd {
-      margin: 0 2em 0 0
-    }
+  h2 {
+    display: flex;
   }
 
   table {
@@ -41,6 +30,17 @@
   td.thumbnail {
     img {
       height: 4em
+    }
+  }
+
+  @media (max-width: 750px) {
+    h2 {
+      flex-direction: column;
+      .item {
+        width: 100%;
+        text-align: left;
+        margin: 0;
+      }
     }
   }
 }

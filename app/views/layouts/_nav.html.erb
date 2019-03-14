@@ -1,11 +1,16 @@
-<div class="nav">
+<nav>
+  <!-- <div class="logo">
+    <a href="/">
+  </div> -->
+
   <%= image_tag "wagthepig-med.png" %>
-  <ul>
+  <ul class="menu">
+    <div class="menu__item toggle"><span></span></div>
     <% if current_user && current_user.incomplete? %>
-      <li><%= link_to "Your profile is incomplete! Add your name!", edit_user_registration_path, method: :get, class: :urgent %></li>
+      <li class="menu__item"><%= link_to "Your profile is incomplete! Add your name!", edit_user_registration_path, method: :get, class: :urgent %></li>
     <%end%>
-    <li><%= button_to(edit_user_registration_path, method: :get){ "Profile" } %></li>
-    <li><%= button_to(events_path, method: :get){ "Events" } %></li>
-    <li><%= button_to(destroy_user_session_path, method: :delete){ "Sign Out"} %></li>
+    <li class="menu__item"><%= button_to(edit_user_registration_path, method: :get){ "Profile" } %></li>
+    <li class="menu__item"><%= button_to(events_path, method: :get){ "Events" } %></li>
+    <li class="menu__item"><%= button_to(destroy_user_session_path, method: :delete){ "Sign Out"} %></li>
   </ul>
-</div>
+</nav>
