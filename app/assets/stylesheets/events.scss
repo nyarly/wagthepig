@@ -33,6 +33,10 @@
     }
   }
 
+  .controls {
+    margin: 2em 0;
+  }
+  
   @media (max-width: 750px) {
     h2 {
       flex-direction: column;
