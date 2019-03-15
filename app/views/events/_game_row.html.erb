@@ -1,4 +1,6 @@
+
 <tr class='<%= game.user_interest(current_user).classname %>' id='game-<%= game.id %>' >
+  <td class='pitch'>Pitch goes here</td>
   <td class='thumbnail'><img data-bggid='<%= game.bgg_id %>'/></td>
   <td class='game'><%= game.bgg_link.present? ? link_to(game.name, game.bgg_link) : game.name %></td>
   <td class='players'><%= game.player_range %></td>

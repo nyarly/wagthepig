@@ -20,12 +20,17 @@
     <%= form.label :date %>
     <div class="input-container">
       <%= form.datetime_select :date %>
-    </div>  
+    </div>
   </div>
 
   <div class="field">
     <%= form.label :where %>
     <%= form.text_area :where %>
+  </div>
+
+  <div class="field">
+    <%= form.label "description (markdown supported)" %>
+    <%= form.text_area :description, rows: 10 %>
   </div>
 
   <div class="actions">

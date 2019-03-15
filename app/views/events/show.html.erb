@@ -4,6 +4,12 @@
   <div class='item'>&nbsp;at <%= @event.where %></div>
 </h2>
 
+<% if @event.description.present? %>
+  <p class="description">
+    <%= @markdown.render(@event.description).html_safe %>
+  </p>
+<% end %>
+
 <div class="controls">
   <%= button_to(edit_event_path(@event), method: :get) { "Edit" } %>
   <%= button_to(new_game_path, method: :get, params: {event_id: @event.id}){'Add a Game'} %>

@@ -58,7 +58,7 @@ class GamesController < ApplicationController
     def game_params
       params
         .require(:game)
-        .permit(:name, :min_players, :max_players, :bgg_id, :duration_minutes, :event_id)
+        .permit(:name, :min_players, :max_players, :bgg_id, :duration_minutes, :event_id, :pitch)
         .tap do |params|
         params[:duration_secs] = params.delete(:duration_minutes).to_i * 60
       end

@@ -9,6 +9,7 @@ class EventsController < ApplicationController
 
   # GET /events/1
   def show
+    @markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML)
   end
 
   # GET /events/new
@@ -54,6 +55,6 @@ class EventsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def event_params
-      params.require(:event).permit(:name, :date, :where)
+      params.require(:event).permit(:name, :date, :where, :description)
     end
 end
