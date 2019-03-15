@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,600,700,800,900" rel="stylesheet">
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
   </head>
 
   <body class='<%= @controller.present? ? "ctrl-#{@controller.gsub(%r[/], "_")}" : "" %> <%= @action.present? ? "actn-#@action" : "" %>'>
