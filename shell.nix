@@ -6,6 +6,8 @@ let
     name = "wagthepig";
 
     gemdir = ./.;
+
+    groups = ["default" "development" "test"];
   };
 in
   pkgs.mkShell {
