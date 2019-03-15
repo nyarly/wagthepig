@@ -25,6 +25,10 @@ form:not(.button_to) {
   }
 }
 
+button[disabled] {
+  background: #AAA;
+}
+
 @media (max-width: 750px) {
   form:not(.button_to) {
     .field {

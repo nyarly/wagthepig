@@ -12,6 +12,7 @@
   </head>
 
   <body class='<%= @controller.present? ? "ctrl-#{@controller.gsub(%r[/], "_")}" : "" %> <%= @action.present? ? "actn-#@action" : "" %>'>
+    <%= render 'layouts/svg' %>
     <%= render 'layouts/nav' %>
     <%= render 'layouts/flash' %>
     <%= yield %>
