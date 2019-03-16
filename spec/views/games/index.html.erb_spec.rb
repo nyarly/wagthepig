@@ -1,4 +1,3 @@
-
 RSpec.describe "games/index", type: :view do
   before(:each) do
     assign(:games, [
