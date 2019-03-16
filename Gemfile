@@ -22,6 +22,8 @@ group :development, :test do
   gem 'rspec'
   gem 'rspec-rails'
   gem 'cadre'
+  gem 'simplecov'
+  gem 'factory_bot'
 end
 
 group :development do

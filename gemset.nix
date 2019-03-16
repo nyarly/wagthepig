@@ -193,6 +193,16 @@
     };
     version = "1.3";
   };
+  docile = {
+    groups = ["default" "development" "test"];
+    platforms = [];
+    source = {
+      remotes = ["https://rubygems.org"];
+      sha256 = "04d2izkna3ahfn6fwq4xrcafa715d3bbqczxm16fq40fqy87xn17";
+      type = "gem";
+    };
+    version = "1.3.1";
+  };
   erubi = {
     groups = ["default" "development" "test"];
     platforms = [];
@@ -210,6 +220,17 @@
       type = "gem";
     };
     version = "2.7.0";
+  };
+  factory_bot = {
+    dependencies = ["activesupport"];
+    groups = ["development" "test"];
+    platforms = [];
+    source = {
+      remotes = ["https://rubygems.org"];
+      sha256 = "02ijqa3g6lb8l8mvi40z1zgh9bb3gr08p2r2ym159ghhfbcrmbwk";
+      type = "gem";
+    };
+    version = "5.0.2";
   };
   ffi = {
     source = {
@@ -240,6 +261,16 @@
       type = "gem";
     };
     version = "1.6.0";
+  };
+  json = {
+    groups = ["default" "development" "test"];
+    platforms = [];
+    source = {
+      remotes = ["https://rubygems.org"];
+      sha256 = "0sx97bm9by389rbzv8r1f43h06xcz8vwi3h5jv074gvparql7lcx";
+      type = "gem";
+    };
+    version = "2.2.0";
   };
   listen = {
     dependencies = ["rb-fsevent" "rb-inotify" "ruby_dep"];
@@ -560,6 +591,27 @@
       type = "gem";
     };
     version = "5.0.7";
+  };
+  simplecov = {
+    dependencies = ["docile" "json" "simplecov-html"];
+    groups = ["development" "test"];
+    platforms = [];
+    source = {
+      remotes = ["https://rubygems.org"];
+      sha256 = "1sfyfgf7zrp2n42v7rswkqgk3bbwk1bnsphm24y7laxv3f8z0947";
+      type = "gem";
+    };
+    version = "0.16.1";
+  };
+  simplecov-html = {
+    groups = ["default" "development" "test"];
+    platforms = [];
+    source = {
+      remotes = ["https://rubygems.org"];
+      sha256 = "1lihraa4rgxk8wbfl77fy9sf0ypk31iivly8vl3w04srd7i0clzn";
+      type = "gem";
+    };
+    version = "0.10.2";
   };
   sprockets = {
     dependencies = ["concurrent-ruby" "rack"];

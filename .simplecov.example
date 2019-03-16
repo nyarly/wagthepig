@@ -2,8 +2,8 @@ require 'cadre/simplecov'
 
 #SimpleCov.start 'rails' do #if, you know: Rails.
 SimpleCov.start do
-  formatter SimpleCov::Formatter::MultiFormatter[
+  formatter SimpleCov::Formatter::MultiFormatter.new([
     SimpleCov::Formatter::HTMLFormatter,
     Cadre::SimpleCov::VimFormatter
-  ]
+  ])
 end

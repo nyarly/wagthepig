@@ -30,3 +30,4 @@ errors.err
 .cadre
 .rspec-local
 .simplecov
+coverage/

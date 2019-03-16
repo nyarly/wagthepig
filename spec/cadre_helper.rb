@@ -1,5 +1,7 @@
 require 'cadre/rspec3'
 
+puts "Cadre setup"
+
 RSpec.configure do |config|
   config.run_all_when_everything_filtered = true
   if config.formatters.empty?
