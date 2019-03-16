@@ -147,6 +147,17 @@
     };
     version = "10.0.2";
   };
+  cadre = {
+    dependencies = ["thor" "tilt" "valise"];
+    groups = ["development" "test"];
+    platforms = [];
+    source = {
+      remotes = ["https://rubygems.org"];
+      sha256 = "07q60s1bm2xar46g00ls5fjkn6dm2kfxhsz9ayblc31x5kr8d83a";
+      type = "gem";
+    };
+    version = "1.0.4";
+  };
   concurrent-ruby = {
     groups = ["default" "development" "test"];
     platforms = [];
@@ -628,6 +639,16 @@
       type = "gem";
     };
     version = "4.1.18";
+  };
+  valise = {
+    groups = ["default" "development" "test"];
+    platforms = [];
+    source = {
+      remotes = ["https://rubygems.org"];
+      sha256 = "1arsbmk2gifrhv244qrld7s3202xrnxy6vlc5gqklg70dpsinbn5";
+      type = "gem";
+    };
+    version = "1.2.1";
   };
   warden = {
     dependencies = ["rack"];
