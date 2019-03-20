@@ -31,3 +31,4 @@ errors.err
 .rspec-local
 .simplecov
 coverage/
+config/database.yml
