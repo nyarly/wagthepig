@@ -73,7 +73,7 @@
         <%= button_to('#', disabled: true){ "Add Notes" } %>
       <% end %>
     </td>
-    <td class='pitch <%= game.pitch.present? ? 'present' : nil %>'>
+    <td class='pitch <%= game.pitch.present? ? 'present' : 'absent' %>'>
       <%= @markdown.render(game.pitch).html_safe if game.pitch.present? %>
     </td>
 

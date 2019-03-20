@@ -1,8 +1,12 @@
 <h1><%= @event.name %></h1>
-<h2>
-  <div class='item'><%= @event.date %></div>
-  <div class='item'>&nbsp;at <%= @event.where %></div>
-</h2>
+<h2 class='item date'><%= @event.date %></h2>
+<h3 class='item location'>at <%= @event.where %></h3>
+
+<% if @event.description.present? %>
+  <div class='description'>
+    <%= @markdown.render(@event.description).html_safe %>
+  </div>
+<% end %>
 
 <div class="controls">
   <%= button_to(edit_event_path(@event), method: :get) { "Edit" } %>

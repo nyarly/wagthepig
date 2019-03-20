@@ -87,6 +87,11 @@
     &.present {
       border-bottom: 1px dotted gray;
     }
+    &.absent {
+      padding: 0;
+      margin: 0;
+      height: 0;
+    }
   }
 
   /* ---- wide screens ------- */
@@ -115,6 +120,7 @@
     padding: 1em 3em;
   }
   td {
+    padding: 5px 0;
     margin-bottom: 2px;
     grid-row: 2;
     // border-bottom: 2px solid black;
@@ -206,7 +212,7 @@
     }
     td.teachers {
       grid-row: 6;
-      &::before { content: "Can teach: "; }
+      &::before { content: "Know rules: "; }
     }
     td.added {
       grid-row: 7;
@@ -228,9 +234,10 @@
     }
     td.pitch {
       grid-area: 1 / 1 / 1 / 3;
-      padding: 1em;
-      border-bottom: 1px dotted gray;
       text-align: left;
+      &.present {
+        padding: 1em;
+      }
     }
 
     tr:nth-child(odd) {
