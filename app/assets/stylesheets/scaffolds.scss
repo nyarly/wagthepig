@@ -6,6 +6,13 @@ body {
   font-size: 13px;
   line-height: 18px;
 }
+@media
+  only screen
+  and (max-width: 760px) {
+    body {
+      margin: 1em;
+    }
+}
 
 p, ol, ul, td {
   font-family: verdana, arial, helvetica, sans-serif;
