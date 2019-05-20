@@ -71,7 +71,8 @@ Rails.application.configure do
   config.action_mailer.default_url_options = { host: 'wagthepig.com' }
   config.action_mailer.smtp_settings = { enable_starttls_auto: false }
   config.action_mailer.sendmail_settings = {
-    location: '/run/current-system/sw/bin/sendmail' # XXX should be provided by Nix
+    location: '/run/wrappers/bin/exim', # XXX should be provided by Nix
+    arguments: '-f "" -i -t'
   }
   config.action_mailer.delivery_method = :sendmail
 
