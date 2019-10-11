@@ -69,10 +69,14 @@ Rails.application.configure do
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
   # config.action_mailer.raise_delivery_errors = false
   config.action_mailer.default_url_options = { host: 'wagthepig.com' }
-  config.action_mailer.smtp_settings = { enable_starttls_auto: false }
-  config.action_mailer.sendmail_settings = {
-    location: '/run/wrappers/bin/exim', # XXX should be provided by Nix
-    arguments: '-f "" -i -t'
+  config.action_mailer.smtp_settings = {
+    addres:                ENV['SMTP_HOST'],
+    port:                  ENV['SMTP_PORT'],
+    user_name:             ENV['SMTP_USERNAME'],
+    password:              ENV['SMTP_PASSWORD'],
+    domain:                'wagthepig.com',
+    enable_starttls_auto:  true,
+    authentication:        'login',
   }
   config.action_mailer.delivery_method = :smtp
 
