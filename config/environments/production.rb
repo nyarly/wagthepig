@@ -70,7 +70,7 @@ Rails.application.configure do
   # config.action_mailer.raise_delivery_errors = false
   config.action_mailer.default_url_options = { host: 'wagthepig.com' }
   config.action_mailer.smtp_settings = {
-    addres:                ENV['SMTP_HOST'],
+    address:                ENV['SMTP_HOST'],
     port:                  ENV['SMTP_PORT'],
     user_name:             ENV['SMTP_USERNAME'],
     password:              ENV['SMTP_PASSWORD'],
