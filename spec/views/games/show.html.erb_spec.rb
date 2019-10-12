@@ -1,20 +1,9 @@
 RSpec.describe "games/show", type: :view do
   before(:each) do
-    @game = assign(:game, Game.create!(
-      :name => "MyText",
-      :min_players => 2,
-      :max_players => 3,
-      :bgg_link => "MyText",
-      :duration_secs => ""
-    ))
+    @game = assign(:game, create(:game))
   end
 
-  it "renders attributes in <p>" do
-    render
-    expect(rendered).to match(/MyText/)
-    expect(rendered).to match(/2/)
-    expect(rendered).to match(/3/)
-    expect(rendered).to match(/MyText/)
-    expect(rendered).to match(//)
+  it "renders successfully" do
+    expect{render}.not_to raise_error
   end
 end

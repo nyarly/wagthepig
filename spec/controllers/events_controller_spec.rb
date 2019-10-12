@@ -40,6 +40,8 @@ RSpec.describe EventsController, type: :controller do
   # EventsController. Be sure to keep this updated too.
   let(:valid_session) { {} }
 
+  login_user
+
   describe "GET #index" do
     it "returns a success response" do
       Event.create! valid_attributes
