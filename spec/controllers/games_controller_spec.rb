@@ -23,16 +23,19 @@
 # `rails-controller-testing` gem.
 
 RSpec.describe GamesController, type: :controller do
+  let :event do
+    create :event
+  end
 
   # This should return the minimal set of attributes required to create a valid
   # Game. As you add validations to Game, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    attributes_for(:game).merge(event_id: event.id)
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    {}
   }
 
   # This should return the minimal set of values that should be in the session
@@ -42,17 +45,9 @@ RSpec.describe GamesController, type: :controller do
 
   login_user
 
-  describe "GET #index" do
-    it "returns a success response" do
-      Game.create! valid_attributes
-      get :index, params: {}, session: valid_session
-      expect(response).to be_successful
-    end
-  end
-
   describe "GET #show" do
     it "returns a success response" do
-      game = Game.create! valid_attributes
+      game = create(:game)
       get :show, params: {id: game.to_param}, session: valid_session
       expect(response).to be_successful
     end
@@ -67,7 +62,7 @@ RSpec.describe GamesController, type: :controller do
 
   describe "GET #edit" do
     it "returns a success response" do
-      game = Game.create! valid_attributes
+      game = create(:game)
       get :edit, params: {id: game.to_param}, session: valid_session
       expect(response).to be_successful
     end
@@ -87,7 +82,37 @@ RSpec.describe GamesController, type: :controller do
       end
     end
 
-    context "with invalid params" do
+    context "when game with that BGG id exists" do
+      let(:the_bgg_id) { 12345 }
+      let(:previous_suggestor){ create(:user)}
+
+      let :existing_game do
+        create(:game, bgg_id: the_bgg_id, event: event, suggestor: previous_suggestor)
+      end
+      before do
+        existing_game
+      end
+
+      it "sets suggestor to that user" do
+        post :create, params: {game: existing_game.attributes}, session: valid_session
+        expect(existing_game.reload.suggestor).to eq(logged_in_user)
+      end
+
+      context "when people are already interested" do
+        before do
+          existing_game.users << create(:user)
+        end
+
+        it "leaves the suggestor as previous user" do
+          post :create, params: {game: existing_game.attributes}, session: valid_session
+          expect(existing_game.reload.suggestor).to eq(previous_suggestor)
+        end
+      end
+
+
+    end
+
+    context "with invalid params", pending: "invalid attributes for a game" do
       it "returns a success response (i.e. to display the 'new' template)" do
         post :create, params: {game: invalid_attributes}, session: valid_session
         expect(response).to be_successful
@@ -98,26 +123,26 @@ RSpec.describe GamesController, type: :controller do
   describe "PUT #update" do
     context "with valid params" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        attributes_for(:game).merge(bgg_id: 45234)
       }
 
       it "updates the requested game" do
-        game = Game.create! valid_attributes
+        game = create(:game)
         put :update, params: {id: game.to_param, game: new_attributes}, session: valid_session
         game.reload
         skip("Add assertions for updated state")
       end
 
       it "redirects to the game" do
-        game = Game.create! valid_attributes
+        game = create(:game, event: event)
         put :update, params: {id: game.to_param, game: valid_attributes}, session: valid_session
-        expect(response).to redirect_to(game)
+        expect(response).to redirect_to(game.event)
       end
     end
 
-    context "with invalid params" do
+    context "with invalid params", pending: "invalid attributes for a game" do
       it "returns a success response (i.e. to display the 'edit' template)" do
-        game = Game.create! valid_attributes
+        game = create(:game)
         put :update, params: {id: game.to_param, game: invalid_attributes}, session: valid_session
         expect(response).to be_successful
       end
@@ -126,14 +151,14 @@ RSpec.describe GamesController, type: :controller do
 
   describe "DELETE #destroy" do
     it "destroys the requested game" do
-      game = Game.create! valid_attributes
+      game = create(:game)
       expect {
         delete :destroy, params: {id: game.to_param}, session: valid_session
       }.to change(Game, :count).by(-1)
     end
 
     it "redirects to the games list" do
-      game = Game.create! valid_attributes
+      game = create(:game)
       delete :destroy, params: {id: game.to_param}, session: valid_session
       expect(response).to redirect_to(games_url)
     end

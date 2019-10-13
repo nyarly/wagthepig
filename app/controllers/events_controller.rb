@@ -10,6 +10,7 @@ class EventsController < ApplicationController
   # GET /events/1
   def show
     @markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML.new(hard_wrap: true))
+    @games = @event.games.with_interest
   end
 
   # GET /events/new

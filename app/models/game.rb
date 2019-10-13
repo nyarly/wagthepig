@@ -4,6 +4,12 @@ class Game < ApplicationRecord
   has_many :interests
   has_many :users, through: :interests
 
+  scope :with_interest, (lambda do
+    joins("join interests as i on games.id = i.game_id")
+      .group("games.id")
+      .having("count(i.id) > 0")
+  end)
+
   def duration_minutes
     duration_secs.nil? ? nil : duration_secs / 60
   end

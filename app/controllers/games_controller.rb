@@ -18,9 +18,14 @@ class GamesController < ApplicationController
 
   # POST /games
   def create
-    @game = Game.new(game_params)
-    @game.suggestor = current_user
-    @game.users << current_user
+    find_params = game_params.extract!(:bgg_id)
+
+    @game = Game.create_with(game_params).find_or_create_by(find_params)
+
+    if @game.users.count == 0
+      @game.suggestor = current_user
+      @game.users << current_user
+    end
 
     if @game.save
       if @game.bgg_id.present?
