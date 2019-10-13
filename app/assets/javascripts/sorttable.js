@@ -121,7 +121,11 @@ sorttable = {
     if (store_as != null) {
       let persistedSort = window.localStorage.getItem(persistedName(store_as));
       if (persistedSort == null) {
-        return;
+        let defaultSort = table.getAttribute("sorttable_default_sort");
+        if defaultSort == null {
+          return;
+        }
+        persistedSort = defaultSort;
       }
       let persistedParts = persistedSort.split("-");
       let colIndex =  new Number(persistedParts[0]);
