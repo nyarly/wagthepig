@@ -122,7 +122,7 @@ sorttable = {
       let persistedSort = window.localStorage.getItem(persistedName(store_as));
       if (persistedSort == null) {
         let defaultSort = table.getAttribute("sorttable_default_sort");
-        if defaultSort == null {
+        if (defaultSort == null) {
           return;
         }
         persistedSort = defaultSort;
