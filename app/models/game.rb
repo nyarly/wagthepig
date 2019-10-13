@@ -45,4 +45,12 @@ class Game < ApplicationRecord
   def user_interest(user)
     interests.find{|i| i.user_id == user.id} || NullInterest.itself
   end
+
+  def disinterest_confirmation
+    if interests.count == 1
+      { "data-confirm" => "You're the last interested player. Are you sure you want to hide this game?" }
+    else
+      {}
+    end
+  end
 end

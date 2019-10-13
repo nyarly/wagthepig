@@ -13,7 +13,7 @@
           <%= form_with model: my_interest, method: :delete, remote: true do |form| %>
             <%= hidden_field_tag 'interest[game_id]', game.id %>
             <%= hidden_field_tag 'interest[user_id]', current_user.id %>
-            <%= button_tag do %>
+            <%= button_tag game.disinterest_confirmation do %>
               <span>I want to play</span>
               <%= svg_icon('checkbox-checked') %>
             <% end %>
