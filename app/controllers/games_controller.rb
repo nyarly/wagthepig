@@ -18,7 +18,7 @@ class GamesController < ApplicationController
 
   # POST /games
   def create
-    find_params = game_params.extract!(:bgg_id)
+    find_params = game_params.extract!(:bgg_id, :event_id)
 
     @game = Game.create_with(game_params).find_or_create_by(find_params)
 
