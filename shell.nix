@@ -3,10 +3,10 @@ let
 in
   { pkgs ? pinned }:
 let
-  inherit (pkgs) lib stdenv ruby rake bundler bundlerEnv sqlite nodejs;
+  inherit (pkgs) lib stdenv rake bundler bundlerEnv sqlite nodejs;
 
   rubyEnv = bundlerEnv {
-    inherit ruby;
+    ruby = pkgs.ruby_2_7;
 
     name = "wagthepig";
 
@@ -17,13 +17,15 @@ let
     groups = ["default" "development" "test"];
   };
 in
-  pkgs.mkShell {
+  stdenv.mkDerivation {
+    name = "wagthepig-dev";
+  #pkgs.mkShell {
     # bunder is here so that updates will work
     buildInputs = with pkgs; [
-      rubyEnv
       nodejs
       sqlite
       bundler
       bundix
+      rubyEnv
     ];
   }

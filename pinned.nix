@@ -1,10 +1,10 @@
 let
   unstableTgz = builtins.fetchTarball {
     # Descriptive name to make the store path easier to identify
-    name = "nixos-nixos-21.05-2023-06-06";
+    name = "nixos-nixos-21.11-2023-06-06";
     # Be sure to update the above if you update the archive
-    url = https://github.com/nixos/nixpkgs/archive/022caabb5f2265ad4006c1fa5b1ebe69fb0c3faf.tar.gz;
-    sha256 = "12q00nbd7fb812zchbcnmdg3pw45qhxm74hgpjmshc2dfmgkjh4n";
+    url = https://github.com/nixos/nixpkgs/archive/eabc38219184cc3e04a974fe31857d8e0eac098d.tar.gz;
+    sha256 = "04ffwp2gzq0hhz7siskw6qh9ys8ragp7285vi1zh8xjksxn1msc5";
   };
 in
 import unstableTgz {}
